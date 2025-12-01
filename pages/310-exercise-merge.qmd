@@ -1,5 +1,5 @@
 ---
-title: Exercise 2
+title: ":: Exercise 2"
 ---
 
 Resolve the conflicts generated in the previous exercise when we created three pull requests:
