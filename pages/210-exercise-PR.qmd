@@ -140,6 +140,10 @@ math.sqrt(variance(data))
 **Step 3**: Update `stats_demo.py` to demonstrate std_dev
 
 ```python
+from stats_lib import mean, variance, std_dev
+```
+
+```python
 # Demonstrate standard deviation
 print("\n--- Standard Deviation ---")
 print(f"Standard deviation: {std_dev(data)}")
