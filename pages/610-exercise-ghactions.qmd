@@ -1,7 +1,4 @@
 ---
-title: Exercise 4
----
----
 title: Exercise 3
 ---
 
@@ -30,7 +27,7 @@ You should see all tests pass with the merged code from the previous exercises.
 
 ## Part 2: Create a GitHub Actions Workflow
 
-**Repository Owner** leads this part, but everyone should follow along in their own clone.
+The **Repository Owner** leads this part, but everyone should follow along in their own clone.
 
 **Step 1**: Create the workflow directory structure
 
@@ -40,45 +37,8 @@ mkdir -p .github/workflows
 
 **Step 2**: Create the workflow file
 
-Create `.github/workflows/pytest.yml` with the following content:
+Create the workflow file `.github/workflows/pytest.yml`. You can use the workflow in <https://github.com/Bristol-Training/demo-calc-lib> as a template.
 
-```yaml
-name: Run Tests
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pytest pytest-cov
-    
-    - name: Run tests with pytest
-      run: |
-        pytest --cov=stats_lib test_stats_lib.py
-    
-    - name: Check code formatting with Black
-      run: |
-        pip install black
-        black --check .
-```
 
 **Step 3**: Ensure `requirements.txt` exists
 
@@ -106,69 +66,7 @@ git push origin main
 
 ## Part 3: Test the Workflow with a Pull Request
 
-Now let's see GitHub Actions in action by creating a pull request with both passing and failing tests.
-
-### Scenario A: Successful PR (Everyone tries this)
-
-**Step 1**: Create a new feature branch
-
-```bash
-git checkout main
-git pull origin main
-git checkout -b feature/add-range-function
-```
-
-**Step 2**: Add a new function to `stats_lib.py`
-
-```python
-def range_stat(data):
-    """Calculate the range (max - min) of the data."""
-    clean_data = [x for x in data if x is not None]
-    
-    if not clean_data:
-        raise ValueError("No valid data points")
-    
-    return max(clean_data) - min(clean_data)
-```
-
-**Step 3**: Add a test to `test_stats_lib.py`
-
-```python
-def test_range_stat():
-    assert range_stat([1, 2, 3, 4, 5]) == 4
-    assert range_stat([10, 20, 30]) == 20
-    assert range_stat([5]) == 0
-
-def test_range_stat_with_na():
-    assert range_stat([1, None, 5, None, 10]) == 9
-```
-
-**Step 4**: Test locally
-
-```bash
-pytest test_stats_lib.py
-```
-
-**Step 5**: Commit and push
-
-```bash
-git add stats_lib.py test_stats_lib.py
-git commit -m "Add range_stat function with tests"
-git push origin feature/add-range-function
-```
-
-**Step 6**: Create Pull Request
-
-1. Go to GitHub and create a pull request
-2. Notice the **yellow circle** appears next to your PR - checks are running!
-3. Wait for it to turn into a **green checkmark** ✅
-4. The PR shows "All checks have passed"
-
-**Repository Owner can merge this PR with confidence!**
-
-### Scenario B: Failing Tests (Demonstration)
-
-Let's deliberately break something to see how GitHub Actions catches it.
+Now let's see GitHub Actions in action by creating a pull request with failing tests.
 
 **Step 1**: Create a buggy branch
 
@@ -209,7 +107,7 @@ git push origin feature/buggy-median
 
 1. Create the pull request on GitHub
 2. Watch the checks run
-3. Notice the **red X** ❌ appears
+3. Notice the **red X** ❌ 
 4. Click "Details" to see which test failed
 5. The PR shows "Some checks were not successful"
 
@@ -222,6 +120,13 @@ git commit -m "Fix median calculation"
 git push origin feature/buggy-median
 ```
 
-GitHub Actions automatically runs again, and now you'll see the green checkmark!
+**Step 6**: Create Pull Request
+
+1. Go to GitHub and create a pull request
+2. Notice the **yellow circle** appears next to your PR - checks are running!
+3. Wait for it to turn into a **green checkmark** ✅
+4. The PR shows "All checks have passed"
+
+**Repository Owner can merge this PR with confidence!**
 
 
