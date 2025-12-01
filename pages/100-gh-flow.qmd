@@ -6,56 +6,65 @@ title: GitHub Flow
 The **GitHub Flow** is an industry-standard workflow for continuous delivery and collaboration. It's lightweight, branch-based, and supports teams of any size working on projects of any complexity.
 
 ::: {.callout-important icon=false}
-### The Six Key Steps
+### The Seven Key Steps
 
-0. **Fork and clone the repository URL**: Fork the repository on GitHub and clone your fork locally so you can start working on changes
-1. **Pull latest from main branch**: Always start with the most recent code
-2. **Create a feature branch**: Make a new branch for your work
-3. **Make commits on your branch**: Save your changes regularly
-4. **Push branch and open Pull Request**: Share your work and request feedback
-5. **Discuss and review code**: Collaborate with teammates on improvements
-6. **Merge to main and delete branch**: Integrate approved changes and clean up
+0. **Fork and clone the repository URL**: Fork the repository on GitHub
+1. **Clone the repository URL**: Clone your fork locally so you can start working on changes
+2. **Pull latest from main branch**: Always start with the most recent code
+3. **Create a feature branch**: Make a new branch for your work
+4. **Make commits on your branch**: Save your changes regularly
+5. **Push branch and open Pull Request**: Share your work and request feedback
+6. **Discuss and review code**: Collaborate with teammates on improvements
+7. **Merge to main and delete branch**: Integrate approved changes and clean up
 :::
 
 
-## Step 0: Fork and clone the repository URL
+## Step 1: Fork a repository
 
-Navigate to the repository on GitHub and click "Fork" to create your own copy. On your forked repository page in GitHub, click the green "Code" button and copy the HTTPS URL (it should look like `https://github.com/YOUR-USERNAME/demo-calc-lib.git`).
+If you want to contribute to a repository where you haven't been added as a collaborator you need to **fork** it.
+
+Navigate to the repository on GitHub, e.g. <https://github.com/Bristol-Training/demo-calc-lib>.
+
+Click "Fork" in the top-right corner
+This creates a copy under your GitHub account (https://github.com/YOUR-USERNAME/demo-calc-lib)
+
+
+## Step 1: Clone the repository URL
+
+On your repository page in GitHub, click the green "Code" button and copy the HTTPS URL (it should look like `https://github.com/YOUR-USERNAME/demo-calc-lib.git`).
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/demo-calc-lib.git
 cd demo-calc-lib
 ```
 
-## Step 1: Pull Latest from Main Branch
+## Step 2: Pull Latest from Main Branch
 
-Before starting new work, ensure you have the latest version of the main branch:
+Before starting new work, ensure you have the latest version of the main branch. This ensures you're building on the most recent stable version, reducing the chance of conflicts later.
 
 ```bash
 git checkout main
 git pull origin main
 ```
 
-This ensures you're building on the most recent stable version, reducing the chance of conflicts later.
-
-## Step 2: Create a Feature Branch
+## Step 3: Create a Feature Branch
 
 Create a new branch for your feature or fix:
 
 ```bash
-git checkout -b feature/add-user-authentication
+git checkout -b feature/add-power-function
 ```
 
 **Branch naming conventions** help teams stay organised:
 
-- `feature/` — for new features (e.g., `feature/add-login-page`)
+- `feature/` — for new features (e.g., `feature/add-power-function`)
 - `fix/` or `bugfix/` — for bug fixes (e.g., `fix/correct-calculation-error`)
 - `docs/` — for documentation updates (e.g., `docs/update-readme`)
 - `refactor/` — for code improvements (e.g., `refactor/simplify-database-queries`)
 
 Use descriptive names that explain what the branch does. Avoid vague names like `my-branch` or `updates`.
 
-## Step 3: Make Commits on Your Branch
+## Step 4: Make Commits on Your Branch
 
 Work on your changes and commit regularly:
 
@@ -76,12 +85,12 @@ git commit -m "Add authentication validation logic"
 - Use present tense ("Add feature" not "Added feature")
 - Explain *what* and *why*, not *how*
 
-## Step 4: Push Branch and Open Pull Request
+## Step 5: Push Branch and Open Pull Request
 
 Push your branch to GitHub:
 
 ```bash
-git push origin feature/add-user-authentication
+git push origin feature/add-power-function
 ```
 
 Then, on GitHub:
@@ -93,7 +102,7 @@ Then, on GitHub:
 5. Click "Create pull request"
 
 
-## Step 5: Discuss and Review Code
+## Step 6: Discuss and Review Code
 
 This is where collaboration happens:
 
@@ -108,12 +117,12 @@ To make changes based on feedback:
 # Make the requested changes
 git add .
 git commit -m "Address review comments: improve error handling"
-git push origin feature/add-user-authentication
+git push origin feature/add-power-function
 ```
 
 The Pull Request automatically updates with your new commits.
 
-## Step 6: Merge to Main and Delete Branch
+## Step 7: Merge to Main and Delete Branch
 
 Once approved, merge the Pull Request via GitHub's interface:
 
@@ -126,7 +135,7 @@ Then, locally:
 ```bash
 git checkout main
 git pull origin main
-git branch -d feature/add-user-authentication
+git branch -d feature/add-power-function
 ```
 
 ::: {.callout-tip icon=false}
@@ -140,4 +149,5 @@ GitHub Flow enables teams to:
 - **Preserve project stability**: The main branch always contains working code
 - **Document decisions**: Pull Request discussions provide context for future developers
 :::
+
 
