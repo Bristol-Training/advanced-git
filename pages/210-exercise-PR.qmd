@@ -1,5 +1,5 @@
 ---
-title: ":: Exercise 1"
+title: "☆ Exercise 1"
 ---
 
 In this exercise we are going to use the a simple statistics library <https://github.com/Bristol-Training/demo-stats-lib>.Repository: https://github.com/Bristol-Training/demo-stats-lib

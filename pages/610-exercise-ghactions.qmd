@@ -1,5 +1,5 @@
 ---
-title: ":: Exercise 3"
+title: "☆ Exercise 3"
 ---
 
 In this exercise we'll add automated testing to the statistics library using GitHub Actions. This ensures all future pull requests are automatically tested before merging.
