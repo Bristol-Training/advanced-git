@@ -438,7 +438,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Step 3</strong>: Attempt to Merge the Second PR</p>
 <p>Now try to merge the second PR (e.g., <code>feature/add-stdev</code>):</p>
 <p>❌ <strong>GitHub shows: “This branch has conflicts that must be resolved”</strong></p>
-<p><strong>Why conflicts exist:</strong> - <code>stats_lib.py</code>: If Group A modified existing functions and Group B added a new function, there might be conflicts in imports or at the end of the file - <code>stats_demo.py</code>: Both groups added different test code to the same file</p>
+<p><strong>Why conflicts exist:</strong></p>
+<ul>
+<li><code>stats_lib.py</code>: If Group A modified existing functions and Group B added a new function, there might be conflicts in imports or at the end of the file</li>
+<li><code>stats_demo.py</code>: Both groups added different test code to the same file</li>
+</ul>
 
 
 </section>

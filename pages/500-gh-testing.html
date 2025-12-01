@@ -282,7 +282,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="types-of-tests">Types of Tests</h3>
 <section id="unit-tests" class="level4">
 <h4 class="anchored" data-anchor-id="unit-tests">Unit Tests</h4>
-<p>Test individual functions or methods in isolation. They should be: - Fast to run - Independent of each other - Focused on a single piece of functionality</p>
+<p>Test individual functions or methods in isolation. They should be:</p>
+<ul>
+<li>Fast to run</li>
+<li>Independent of each other</li>
+<li>Focused on a single piece of functionality</li>
+</ul>
 <p>Example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_mean():</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> mean([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]) <span class="op">==</span> <span class="fl">3.0</span></span>
