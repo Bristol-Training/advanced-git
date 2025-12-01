@@ -70,7 +70,6 @@ Add NA handling to existing functions. For example:
 clean_data = [x for x in data if x is not None]
 ```
 
-Add similar handling to all the functions (`median`, `mode`, etc.).
 
 **Step 3**: Update `stats_demo.py` to test with NA values
 
