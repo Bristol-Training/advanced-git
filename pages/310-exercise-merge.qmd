@@ -1,0 +1,194 @@
+---
+title: Exercise 2
+---
+
+Resolve the conflicts generated in the previous exercise when we created three pull requests:
+- `feature/na-handling` (modifies existing functions + stats_demo.py)
+- `feature/add-stdev` (adds new function + stats_demo.py)
+- `style/black-formatting` (reformats all files)
+
+
+### Step 1. Attempt to Merge the Second PR
+
+Now try to merge the second PR (e.g., `feature/add-stdev`):
+
+❌ **GitHub shows: "This branch has conflicts that must be resolved"**
+
+**Why conflicts exist:**
+- `stats_lib.py`: If Group A modified existing functions and Group B added a new function, there might be conflicts in imports or at the end of the file
+- `stats_demo.py`: Both groups added different test code to the same file
+
+### Step 2. Resolve Conflicts for Second PR
+
+The person who created `feature/add-stdev` should:
+
+**Step 1**: Update your local repository
+
+```bash
+git checkout main
+git pull origin main  # Get the merged changes from feature/na-handling
+```
+
+**Step 2**: Merge main into your feature branch
+
+```bash
+git checkout feature/add-stdev
+git merge main
+```
+
+**Output might show:**
+```
+Auto-merging stats_lib.py
+Auto-merging stats_demo.py
+CONFLICT (content): Merge conflict in stats_demo.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**Step 3**: Resolve `stats_demo.py` conflicts
+
+Open `stats_demo.py` and look for conflict markers:
+
+```python
+<<<<<<< HEAD
+# Your std_dev demo code
+print("\n--- Standard Deviation ---")
+print(f"Standard deviation: {std_dev(data)}")
+=======
+# The NA handling demo code from main
+test_data_with_na = [1, 2, None, 4, 5, None, 7]
+print(f"Mean (with NAs): {mean(test_data_with_na)}")
+print(f"Variance (with NAs): {variance(test_data_with_na)}")
+>>>>>>> main
+```
+
+**Resolution**: Keep BOTH sets of changes:
+
+```python
+# NA handling demo
+test_data_with_na = [1, 2, None, 4, 5, None, 7]
+print(f"Mean (with NAs): {mean(test_data_with_na)}")
+print(f"Variance (with NAs): {variance(test_data_with_na)}")
+
+# Standard deviation demo
+print("\n--- Standard Deviation ---")
+print(f"Standard deviation: {std_dev(data)}")
+print(f"This measures spread from the mean")
+```
+
+**Step 4**: Check if `stats_lib.py` has conflicts
+
+If the std_dev function uses variance (which now has NA handling), you might need to update it or ensure it works correctly with the new NA-handling code.
+
+**Step 5**: Test everything works
+
+```bash
+python stats_demo.py
+```
+
+**Step 6**: Commit the resolution
+
+```bash
+git add stats_demo.py stats_lib.py
+git commit -m "Resolve merge conflict: combine NA handling with std_dev function"
+git push origin feature/add-stdev
+```
+
+**Step 7**: Merge the PR on GitHub
+
+The PR should now show no conflicts. Repository Owner can merge it!
+
+✅ **Second PR merged successfully!**
+
+### Step 3: Resolve Conflicts for Third PR (Black Formatting)
+
+Now the final PR (`style/black-formatting`) will definitely have conflicts because it reformatted code that has since been modified.
+
+The person who created `style/black-formatting` should:
+
+**Step 1**: Update and merge
+
+```bash
+git checkout main
+git pull origin main
+git checkout style/black-formatting
+git merge main
+```
+
+**Output:**
+```
+Auto-merging stats_lib.py
+CONFLICT (content): Merge conflict in stats_lib.py
+Auto-merging stats_demo.py
+CONFLICT (content): Merge conflict in stats_demo.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**Step 2**: Resolve conflicts in `stats_lib.py`
+
+You'll see conflicts where Black's formatting meets the new code:
+
+```python
+<<<<<<< HEAD
+# Black-formatted original code
+def mean(data):
+    return sum(data) / len(data)
+=======
+# New NA-handling version with different formatting
+def mean(data):
+    """Calculate mean, ignoring None values."""
+    clean_data = [x for x in data if x is not None]
+    
+    if not clean_data:
+        raise ValueError("No valid data points")
+    
+    return sum(clean_data) / len(clean_data)
+
+def std_dev(data):
+    """Calculate standard deviation..."""
+    return math.sqrt(variance(data))
+>>>>>>> main
+```
+
+**Resolution strategy**: Keep ALL the new functionality from main (NA handling + std_dev), then re-apply Black:
+
+1. Accept all changes from main (the NA handling and std_dev function)
+2. Remove conflict markers
+3. Run Black again to format everything
+
+**Step 3**: Accept main's version and re-format
+
+```bash
+# For each conflicted file, accept their changes
+git checkout --theirs stats_lib.py stats_demo.py
+
+# Re-apply Black to format the new code
+black .
+```
+
+
+**Step 4**: Verify everything still works
+
+```bash
+python stats_demo.py
+```
+
+You should see output for:
+- Original statistics
+- NA handling tests
+- Standard deviation calculation
+
+**Step 5**: Commit the resolution
+
+```bash
+git add .
+git commit -m "Resolve merge conflicts: apply Black formatting to updated codebase"
+git push origin style/black-formatting
+```
+
+**Step 6**: Merge the final PR
+
+Repository Owner can now merge the last PR!
+
+✅ **All three PRs successfully merged!**
+
+

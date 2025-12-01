@@ -1,0 +1,143 @@
+---
+title: GitHub Flow
+---
+
+
+The **GitHub Flow** is an industry-standard workflow for continuous delivery and collaboration. It's lightweight, branch-based, and supports teams of any size working on projects of any complexity.
+
+::: {.callout-important icon=false}
+### The Six Key Steps
+
+0. **Fork and clone the repository URL**: Fork the repository on GitHub and clone your fork locally so you can start working on changes
+1. **Pull latest from main branch**: Always start with the most recent code
+2. **Create a feature branch**: Make a new branch for your work
+3. **Make commits on your branch**: Save your changes regularly
+4. **Push branch and open Pull Request**: Share your work and request feedback
+5. **Discuss and review code**: Collaborate with teammates on improvements
+6. **Merge to main and delete branch**: Integrate approved changes and clean up
+:::
+
+
+## Step 0: Fork and clone the repository URL
+
+Navigate to the repository on GitHub and click "Fork" to create your own copy. On your forked repository page in GitHub, click the green "Code" button and copy the HTTPS URL (it should look like `https://github.com/YOUR-USERNAME/demo-calc-lib.git`).
+
+```bash
+git clone https://github.com/YOUR-USERNAME/demo-calc-lib.git
+cd demo-calc-lib
+```
+
+## Step 1: Pull Latest from Main Branch
+
+Before starting new work, ensure you have the latest version of the main branch:
+
+```bash
+git checkout main
+git pull origin main
+```
+
+This ensures you're building on the most recent stable version, reducing the chance of conflicts later.
+
+## Step 2: Create a Feature Branch
+
+Create a new branch for your feature or fix:
+
+```bash
+git checkout -b feature/add-user-authentication
+```
+
+**Branch naming conventions** help teams stay organised:
+
+- `feature/` — for new features (e.g., `feature/add-login-page`)
+- `fix/` or `bugfix/` — for bug fixes (e.g., `fix/correct-calculation-error`)
+- `docs/` — for documentation updates (e.g., `docs/update-readme`)
+- `refactor/` — for code improvements (e.g., `refactor/simplify-database-queries`)
+
+Use descriptive names that explain what the branch does. Avoid vague names like `my-branch` or `updates`.
+
+## Step 3: Make Commits on Your Branch
+
+Work on your changes and commit regularly:
+
+```bash
+# Make changes to files
+git add .
+git commit -m "Add login form component"
+
+# Make more changes
+git add .
+git commit -m "Add authentication validation logic"
+```
+
+**Good commit practices:**
+
+- Commit small, logical chunks of work
+- Write clear, descriptive commit messages
+- Use present tense ("Add feature" not "Added feature")
+- Explain *what* and *why*, not *how*
+
+## Step 4: Push Branch and Open Pull Request
+
+Push your branch to GitHub:
+
+```bash
+git push origin feature/add-user-authentication
+```
+
+Then, on GitHub:
+
+1. Navigate to your repository
+2. Click "Compare & pull request" (appears after pushing)
+3. Write a clear title and description
+4. Request reviewers
+5. Click "Create pull request"
+
+
+## Step 5: Discuss and Review Code
+
+This is where collaboration happens:
+
+- **Reviewers** examine the code, suggest improvements, and ask questions
+- **Author** responds to comments and makes requested changes
+- **Discussion** happens directly on the Pull Request
+
+To make changes based on feedback:
+
+```bash
+# Still on your feature branch
+# Make the requested changes
+git add .
+git commit -m "Address review comments: improve error handling"
+git push origin feature/add-user-authentication
+```
+
+The Pull Request automatically updates with your new commits.
+
+## Step 6: Merge to Main and Delete Branch
+
+Once approved, merge the Pull Request via GitHub's interface:
+
+1. Click "Merge pull request"
+2. Confirm the merge
+3. Delete the branch (GitHub prompts you to do this)
+
+Then, locally:
+
+```bash
+git checkout main
+git pull origin main
+git branch -d feature/add-user-authentication
+```
+
+::: {.callout-tip icon=false}
+## Why This Matters
+
+GitHub Flow enables teams to:
+
+- **Ship code safely and frequently**: Small, reviewed changes are less risky
+- **Work in parallel**: Multiple features can be developed simultaneously
+- **Maintain code quality**: Code review catches bugs and improves design
+- **Preserve project stability**: The main branch always contains working code
+- **Document decisions**: Pull Request discussions provide context for future developers
+:::
+

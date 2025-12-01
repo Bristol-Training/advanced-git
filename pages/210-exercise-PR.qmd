@@ -1,0 +1,290 @@
+---
+title: Exercise 1
+---
+
+In this exercise we are going to use the a simple statistics library <https://github.com/Bristol-Training/demo-stats-lib>.Repository: https://github.com/Bristol-Training/demo-stats-lib
+
+
+**Form groups of 3-6 people** and assign roles within your group:
+
+- **1 person**: Repository Owner (creates fork and manages PRs)
+- **1-2 people**: Feature Developers A (add std_dev function)
+- **1-2 people**: Feature Developers B (add NA handling)
+- **1-2 people**: Code Formatters (apply Black formatting)
+
+---
+
+## Part 1: Repository Setup
+
+Repository Owner does these steps:
+
+**Step 1**: Fork the Repository
+
+1. Go to `https://github.com/Bristol-Training/demo-stats-lib`
+2. Click **Fork** (top-right)
+3. This creates a copy under your GitHub account
+
+**Step 2**: Add Collaborators
+
+1. In your forked repository, go to **Settings** → **Collaborators**
+2. Click **Add people**
+3. Add each team member by their GitHub username
+4. Team members will receive an email invitation they must accept
+
+**Step 3**: Everyone Clones the Fork
+
+All team members (including owner):
+
+```bash
+# Replace OWNER-USERNAME with the repository owner's username
+git clone https://github.com/OWNER-USERNAME/demo-stats-lib.git
+cd demo-stats-lib
+```
+
+---
+
+## Part 2: Parallel Development
+
+::: {.panel-tabset}
+
+## Task A
+
+**Objective**: Make statistics functions robust to missing values `NA`.
+
+#### Task Instructions
+
+**Step 1**: Create and switch to your feature branch
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/na-handling
+```
+
+**Step 2**: Modify `stats_lib.py`
+
+Add NA handling to existing functions. For example:
+
+```python
+# Filter out None values
+clean_data = [x for x in data if x is not None]
+```
+
+Add similar handling to all the functions (`median`, `mode`, etc.).
+
+**Step 3**: Update `stats_demo.py` to test with NA values
+
+```python
+# Add test cases with None values
+test_data_with_na = [1, 2, None, 4, 5, None, 7]
+print(f"Mean (with NAs): {mean(test_data_with_na)}")
+print(f"Variance (with NAs): {variance(test_data_with_na)}")
+```
+
+**Step 4**: Test your changes
+
+```bash
+python stats_demo.py
+```
+
+**Step 5**: Commit and push
+
+```bash
+git add stats_lib.py stats_demo.py
+git commit -m "Add NA handling to statistics functions"
+git push origin feature/na-handling
+```
+
+**Step 6**: Create Pull Request
+
+1. Go to GitHub repository
+2. Click **"Compare & pull request"**
+3. Title: `"Add NA handling to statistics functions"`
+4. Description:
+   ```markdown
+   ## Changes
+   - Added None value filtering to all statistics functions
+   - Updated demo.py with NA test cases
+   
+   ## Testing
+   - Tested with datasets containing None values
+   - All functions handle empty datasets appropriately
+   ```
+5. Click **"Create pull request"** (don't merge yet!)
+
+---
+
+## Task B
+
+**Objective**: Add a new standard deviation function to the statistics library.
+
+#### Task Instructions
+
+**Step 1**: Create your feature branch
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/add-stdev
+```
+
+**Step 2**: Add the std_dev function to `stats_lib.py`
+
+You can use:
+
+```python
+import math
+
+math.sqrt(variance(data))
+```
+
+**Step 3**: Update `stats_demo.py` to demonstrate std_dev
+
+```python
+# Demonstrate standard deviation
+print("\n--- Standard Deviation ---")
+print(f"Standard deviation: {std_dev(data)}")
+```
+
+**Step 4**: Test your function
+
+```bash
+python stats_demo.py
+```
+
+You should see the standard deviation calculated for the temperature data.
+
+**Step 5**: Commit and push
+
+```bash
+git add stats_lib.py demo.py
+git commit -m "Add std_dev function to calculate standard deviation"
+git push origin feature/add-stdev
+```
+
+**Step 6**: Create Pull Request
+
+1. Go to GitHub repository
+2. Click **"Compare & pull request"**
+3. Title: `"Add standard deviation function"`
+4. Description:
+   ```markdown
+   ## Changes
+   - Added `std_dev(data)` function to statistics.py
+   - Function calculates standard deviation as sqrt(variance)
+   - Updated stats_demo.py to demonstrate the new function
+   
+   ## Testing
+   - Manually tested with temperature datasets
+   - Verified output matches expected results
+   ```
+5. Click **"Create pull request"** (don't merge yet!)
+
+---
+
+## Task C
+
+**Objective**: Reformat the codebase using Black for consistent style.
+
+#### Task Instructions
+
+**Step 1**: Create your feature branch
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b style/black-formatting
+```
+
+**Step 2**: Apply Black formatting to your project
+
+```bash
+# Format the entire project
+black .
+
+# You should see output like:
+# reformatted stats_lib.py
+# reformatted stats_demo.py
+# 2 files reformatted, X files left unchanged
+```
+
+**Step 3**: Review the changes
+
+```bash
+git diff
+```
+
+Notice how Black has:
+- Adjusted line spacing
+- Reformatted string quotes
+- Fixed indentation
+- Wrapped long lines
+
+**Step 4**: Commit and push
+
+```bash
+git add .
+git commit -m "Apply Black formatting to entire codebase"
+git push origin style/black-formatting
+```
+
+**Step 5**: Create Pull Request
+
+1. Go to GitHub repository
+2. Click **"Compare & pull request"**
+3. Title: `"Apply Black code formatting"`
+4. Description:
+   ```markdown
+   ## Changes
+   - Applied Black formatter to all Python files
+   - Ensures PEP 8 compliance
+   - No functional changes, style only
+   
+   ## Testing
+   - Verified all existing tests still pass
+   - Code functionality unchanged
+   ```
+5. Click **"Create pull request"** (don't merge yet!)
+
+
+:::
+
+
+
+
+## Part 3: The Merge Challenge
+
+Everyone gathers together for this part.
+
+**Step 1**: Observe the Pull Requests
+
+Repository Owner should now have **THREE** open pull requests:
+- `feature/na-handling` (modifies existing functions + demo.py)
+- `feature/add-stdev` (adds new function + demo.py)
+- `style/black-formatting` (reformats all files)
+
+All three modified `stats_lib.py` and `demo.py`!
+
+**Step 2**: Merge the First PR
+
+Repository Owner:
+
+1. Choose one PR (e.g., `feature/na-handling`)
+2. Review the changes on GitHub
+3. Click **"Merge pull request"**
+4. Click **"Confirm merge"**
+5. Optionally delete the branch
+
+✅ **First PR merged successfully!**
+
+**Step 3**: Attempt to Merge the Second PR
+
+Now try to merge the second PR (e.g., `feature/add-stdev`):
+
+❌ **GitHub shows: "This branch has conflicts that must be resolved"**
+
+**Why conflicts exist:**
+- `stats_lib.py`: If Group A modified existing functions and Group B added a new function, there might be conflicts in imports or at the end of the file
+- `stats_demo.py`: Both groups added different test code to the same file
+
+

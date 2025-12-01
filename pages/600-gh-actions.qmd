@@ -1,0 +1,134 @@
+---
+title: GitHub Actions
+---
+
+GitHub Actions is a powerful automation tool that enables Continuous Integration (CI) and Continuous Deployment (CD) directly within your GitHub repository. With GitHub Actions, you can define workflows that automatically build, test, and deploy your code whenever changes are made. This ensures that your code is always in a deployable state and helps catch issues early in the development process.
+
+By leveraging GitHub Actions, teams can streamline their development workflows, reduce manual intervention, and improve collaboration. Whether you're running tests on every push, deploying to production after successful builds, or automating other tasks, GitHub Actions provides a flexible and scalable solution for modern software development practices.
+
+
+# Setting Up GitHub Actions 
+
+### Step 1: Create the Workflow Directory
+
+If it doesn't exist already, create the following directory structure in your repository:
+
+```
+your-repo/
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+```
+
+### Step 2: Add the Workflow File
+
+Create a file called `test-calc-lib.yml` in `.github/workflows/` with this content:
+
+```yaml
+name: Run Python Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov
+    
+    - name: Run tests with pytest
+      run: |
+        pytest test_calc_lib.py -v --cov=calc_lib --cov-report=term-missing
+    
+    - name: Test demo script runs
+      run: |
+        python calc_demo.py
+```
+
+### Step 3: Commit and Push
+
+```bash
+git add .github/workflows/tests.yml
+git commit -m "ci: add GitHub Actions workflow for automated testing"
+git push origin main
+```
+
+### Step 4: View Your Workflow
+
+1. Go to your repository on GitHub
+2. Click the "Actions" tab at the top
+3. You should see your workflow running! When you click on a workflow run, you'll see:
+
+```
+✅ Run Tests
+  └─ test
+     ├─ Checkout code (✓)
+     ├─ Set up Python (✓)
+     ├─ Install dependencies (✓)
+     └─ Run tests (✓ or ✗)
+```
+
+# Understanding the Workflow
+
+### Triggers (`on:`)
+```yaml
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+```
+- Tests run when you push to the `main` branch
+- Tests run when someone creates a pull request to `main`
+
+### Job Configuration (`jobs:`)
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+```
+- Creates a job called "test"
+- Runs on the latest Ubuntu virtual machine
+
+### Steps (`steps:`)
+Each step is a task that runs in sequence:
+
+1. `Checkout code` - Downloads your repository code
+2. `Set up Python` - Installs Python (one or multiple versions)
+3. `Install dependencies` - Installs packages from `requirements.txt`
+4. `Run tests` - Executes pytest
+
+
+
+## Branch Protection (optional)
+
+Require tests to pass before merging:
+
+1. Go to Settings → Branches
+2. Add branch protection rule for `main`
+3. Check "Require status checks to pass before merging"
+4. Select your test workflow
+5. Save changes
+
+Now PRs can't be merged if tests fail!
+
+

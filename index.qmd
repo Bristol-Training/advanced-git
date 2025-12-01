@@ -1,0 +1,52 @@
+---
+title: Introduction
+---
+
+## The `report_final_v3_FINAL.docx` Problem
+
+Have you ever experienced a situation like this?
+
+> You're writing a report with colleagues. You start with `report.docx` and email it to your supervisor for comments. They return `report_with_corrections.docx`. Meanwhile, you've made more changes, creating `report_v2.docx`, and emailed it to a collaborator to add their section. You try to incorporate the supervisor's suggestions from `report_with_corrections.docx` into `report_v2.docx`, creating `report_v3.docx`. Then your supervisor sends `report_with_corrections_more.docx` and your collaborator returns `report_v2_my_additions.docx`.
+
+This scenario illustrates several common problems with ad-hoc collaboration:
+
+- **No single source of truth**: Which version is the "correct" one?
+- **Lost work**: Changes made in one version may not make it into another
+- **Confusion**: Who made which changes and when?
+- **Merge nightmares**: Manually combining changes is error-prone and time-consuming
+- **Versioning chaos**: Filenames become increasingly absurd
+
+## Git as a Single Source of Truth
+
+Git and GitHub solve these problems by providing a **single source of truth** — a central repository that contains the authoritative version of your project. All collaborators work on their own local copies, make changes, and synchronise those changes through the central repository.
+
+This approach provides:
+
+- **Clear history**: Every change is tracked with who made it and why
+- **No lost work**: All changes are preserved in the version history
+- **Safe experimentation**: Work can happen in parallel without interfering
+- **Automatic merging**: Git handles most merge scenarios automatically
+- **Conflict resolution tools**: When conflicts occur, Git helps you resolve them
+
+
+## Intended learning outcomes
+
+By the end of this course, you will:
+
+- Apply GitHub Flow for team collaboration
+- Create and manage feature branches effectively
+- Write clear, focused Pull Requests
+- Conduct constructive code reviews
+- Resolve merge conflicts confidently
+- Implement branch protection rules for code quality
+
+
+## Prerequisites
+
+Before starting this session, you should be comfortable with:
+
+- Basic Git commands (`git add`, `git commit`, `git push`, `git pull`)
+- Creating and using GitHub repositories, including forks
+- Understanding what commits and repositories are
+- Basic command line navigation
+- Python programming

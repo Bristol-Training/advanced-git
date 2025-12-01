@@ -1,0 +1,8 @@
+---
+title: Contributors
+---
+
+The course has been developed by the Jean Golding Institute.
+
+Part of this course is inspired by the originally written course by Christopher Woods and published at <https://chryswoods.com/beginning_git>. 
+

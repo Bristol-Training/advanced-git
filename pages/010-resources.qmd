@@ -1,0 +1,100 @@
+---
+title: Workspace & Resources
+---
+
+## pytest
+
+`pytest` is a mature, full-featured Python testing framework that makes it easy to write readable and maintainable tests.
+
+You can install pytest with:
+
+::: {.panel-tabset}
+
+## pip
+```bash
+# Using pip (built-in with Python)
+pip install pytest pytest-cov 
+```
+
+## conda
+```bash
+# Using conda (recommended for data science)
+conda install pytest pytest-cov
+```
+
+## uv
+```bash
+# Using uv (fast, modern alternative)
+uv pip install pytest pytest-cov
+```
+:::
+
+
+## Black
+
+Black is Python code formatter that automatically reformats your code to follow PEP 8 style guidelines. Black will adjust spacing, line length, quotes, and more, eliminating debates about code style.
+
+Black ensures uniform code style across all contributors, eliminating the need for manual formatting.
+
+Install Black with:  
+  
+::: {.panel-tabset}
+
+## pip
+```bash
+# Using pip (built-in with Python)
+pip install black
+```
+
+## conda
+```bash
+# Using conda (recommended for data science)
+conda install black
+```
+
+## uv
+```bash
+# Using uv (fast, modern alternative)
+uv pip install black
+```
+:::
+
+
+## Calculator library
+
+A demo repository with a simple Python calculator library with examples practicing GitHub workflows, with examples of automated testing and continuous integration.
+
+<https://github.com/Bristol-Training/demo-calc-lib>
+
+```
+demo-calc-lib/
+├── .github/
+│   └── workflows
+│       └── pytest.yml
+├── .gitignore
+├── calc_demo.py
+├── calc_lib.py
+├── README.md
+├── requirements.txt
+└── test_calc_lib.py
+```
+
+## Statistics library
+
+A demo repository with a simple statistics library for practicing team collaboration, automated testing, and continuous integration.
+
+<https://github.com/Bristol-Training/demo-stats-lib>
+
+```
+demo-stats-lib/
+├── data/
+│   ├── temp1995.csv
+│   └── temp2005.csv
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── stats_lib.py
+├── stats_demo.py
+└── test_stats_lib.py
+```
+

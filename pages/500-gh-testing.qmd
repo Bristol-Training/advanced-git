@@ -1,0 +1,106 @@
+---
+title: Testing
+---
+
+## Why Testing Matters
+
+Testing is a critical part of software development that helps ensure your code works as expected and continues to work as you make changes. Well-tested code is:
+
+- **More reliable**: Catches bugs before they reach production
+- **Easier to refactor**: You can confidently make changes knowing tests will catch regressions
+- **Better documented**: Tests serve as executable examples of how code should be used
+- **More maintainable**: Future developers (including future you) can understand intended behavior
+
+
+## Why Testing Matters in CI/CD
+
+In modern software development, Continuous Integration and Continuous Deployment (CI/CD) pipelines automatically build, test, and deploy code. Testing is the critical safety net that makes this automation possible:
+
+- **Automated Quality Gates**: Tests run automatically on every change, preventing broken code from reaching production
+- **Fast Feedback**: Developers know within minutes if their changes break existing functionality
+- **Confidence in Deployment**: Well-tested code can be deployed frequently and safely
+- **Team Collaboration**: Tests catch integration issues when multiple developers work on the same codebase
+- **Documentation**: Tests serve as living examples of how the code should behave
+
+Without comprehensive testing, CI/CD becomes risky - you're automating the deployment of potentially broken code.
+
+
+## Types of Tests
+
+### Unit Tests
+Test individual functions or methods in isolation. They should be:
+- Fast to run
+- Independent of each other
+- Focused on a single piece of functionality
+
+Example:
+```python
+def test_mean():
+    assert mean([1, 2, 3, 4, 5]) == 3.0
+    assert mean([10, 20]) == 15.0
+```
+
+### Integration Tests
+Test how different components work together. They verify that modules interact correctly.
+
+### Test-Driven Development (TDD)
+A development approach where you:
+
+1. Write a failing test first
+2. Write the minimum code to make it pass
+3. Refactor while keeping tests green
+
+
+## Testing in Python with pytest
+
+Python's `pytest` framework makes testing straightforward:
+
+```python
+# test_stats_lib_short.py
+import pytest
+from stats_lib import mean, variance
+
+def test_mean_basic():
+    """Test mean with simple values"""
+    assert mean([1, 2, 3]) == 2.0
+
+def test_mean_empty_list():
+    """Test mean handles empty list appropriately"""
+    with pytest.raises(ValueError):
+        mean([])
+
+def test_variance():
+    """Test variance calculation"""
+    result = variance([1, 2, 3, 4, 5])
+    assert abs(result - 2.0) < 0.01  # floating point comparison
+```
+
+Run tests with:
+```bash
+pytest
+pytest -v  # verbose output
+pytest test_stats_lib  # specific file
+```
+
+You can also measure code coverage (i.e., see which parts of your code are exercised by your tests):
+```bash
+pytest --cov
+```
+
+## Best Practices
+
+- **Test edge cases**: Empty inputs, negative numbers, very large values
+- **Use descriptive test names**: `test_mean_with_negative_numbers` is better than `test1`
+- **One assertion per test**: Makes failures easier to diagnose
+- **Keep tests independent**: Tests shouldn't rely on execution order
+- **Aim for good coverage**: But 100% coverage doesn't guarantee bug-free code
+
+
+
+## Further Information
+
+[Practical PyTest](https://www.youtube.com/watch?v=MRSgZSaIP-E&list=PLx325CxArn15VHMrE2E70MmW436ebZI9I). 
+A practical introduction to testing, aimed at developers who are unsure about its value. It explains why testing matters, how it can improve confidence in your code, and hopefully makes a convincing case for adopting testing as part of your workflow.
+
+[Best Practices in Software Engineering](https://bristol-training.github.io/best-practices-software-engineering/).
+An introduction to some techniques and processes which are essential if you are going to be developing professional-quality software: documentation, testing and licensing.

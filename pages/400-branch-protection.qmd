@@ -1,0 +1,165 @@
+---
+title: Branch Protection
+---
+
+
+## Branch Protection Rules
+
+**Branch protection rules** enforce quality standards by restricting how code can be merged into important branches (like `main`).
+
+#### Why Protect Branches?
+
+Without protection:
+
+- Anyone can push directly to main
+- Broken code can reach production
+- Changes might not be reviewed
+- Tests might be skipped
+
+With protection:
+
+- All changes go through Pull Requests
+- Code must be reviewed before merging
+- Tests must pass before merging
+- Main branch always remains stable
+
+#### Common Protection Rules
+
+1. **Require pull requests**: No direct commits to main
+2. **Require reviews**: At least N people must approve
+3. **Require status checks**: Tests must pass
+4. **Enforce linear history**: No merge commits (rebase or squash only)
+5. **Require signed commits**: Verify commit authenticity
+6. **Restrict who can push**: Only certain team members
+
+### Setting Up Branch Protection
+
+To set up branch protection on GitHub do:
+
+**Step 1**: Navigate to repository settings
+
+1. Go to your repository on GitHub
+2. Click "Settings" (you need admin access)
+3. Click "Branches" in the left sidebar
+
+**Step 2**: Add a protection rule
+
+1. Click "Add branch protection rule"
+2. In "Branch name pattern", enter `main`
+
+**Step 3**: Configure rules
+
+**Recommended settings for teams**:
+
+- **Require a pull request before merging**
+  - Require approvals: 1 (or more for larger teams)
+  - Dismiss stale pull request approvals when new commits are pushed
+  - Require review from Code Owners (if you have a CODEOWNERS file)
+
+- **Require status checks to pass before merging**
+  - Require branches to be up to date before merging
+  - Select specific checks (e.g., "tests", "lint")
+
+- **Require conversation resolution before merging**
+  - Ensures all review comments are addressed
+
+- **Require linear history**
+  - Keeps history clean and readable
+
+- **Do not allow bypassing the above settings** (recommended for production)
+
+**Step 4**: Save the rule
+
+Click "Create" or "Save changes".
+
+
+#### Testing Branch Protection
+
+Try to push directly to main:
+
+```bash
+git checkout main
+# Make a change
+git add .
+git commit -m "Test direct push"
+git push origin main
+```
+
+You'll see an error:
+
+```
+remote: error: GH006: Protected branch update failed for refs/heads/main.
+```
+
+Good! Protection is working. You must now use Pull Requests.
+
+## Code Quality Tools 
+
+Branch protection becomes powerful when combined with automated checks.
+
+::: {.callout-tip icon=false}
+#### Benefits of Automated Checks
+
+- **Catch bugs before review**: Reviewers focus on logic, not syntax
+- **Enforce standards**: Everyone follows the same code style
+- **Save time**: Automated checks run in minutes, not hours
+- **Build confidence**: Know that all tests pass before merging
+- **Documentation**: CI logs show exactly what was tested
+:::
+
+#### Types of Automated Checks
+
+**1. Continuous Integration (CI)**
+
+Automatically run tests on every Pull Request:
+
+```yaml
+# .github/workflows/test.yml
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest
+```
+
+**2. Code Linting**
+
+Check code style and potential errors:
+
+```yaml
+- name: Run flake8
+  run: flake8 .
+```
+
+**3. Code Coverage**
+
+Ensure tests cover enough of the code:
+
+```yaml
+- name: Run tests with coverage
+  run: pytest --cov=. --cov-report=xml
+```
+
+**4. Security Scanning**
+
+Check for known vulnerabilities:
+
+```yaml
+- name: Security check
+  run: bandit -r .
+```
+
+
+

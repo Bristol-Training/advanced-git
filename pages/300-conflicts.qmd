@@ -1,0 +1,424 @@
+---
+title: Handling Merge Conflicts
+---
+
+
+A **merge conflict** occurs when Git can't automatically combine changes because two people have edited the same part of a file in different ways.
+
+Conflicts happen when:
+
+1. You and a colleague both modify the same line of code
+2. One person edits a line while another deletes it
+3. Changes are made in overlapping sections of a file
+
+Importantly, conflicts **do not** occur when:
+
+- Changes are in different files
+- Changes are in different parts of the same file
+- One person's changes come entirely before or after another's
+
+#### Example Scenario
+
+You and your colleague both create branches from main:
+
+```
+main: A -- B -- C
+             \
+              \-- D (your branch: change line 5)
+               \
+                \-- E (colleague's branch: change line 5)
+```
+
+Your colleague merges first. When you try to merge, Git sees:
+
+- Main now has E (colleague's version of line 5)
+- Your branch has D (your version of line 5)
+- Git doesn't know which to keep, so it asks you to decide
+
+#### What Conflicts Look Like
+
+When you encounter a conflict, Git marks the conflicting section in your file:
+
+```python
+def calculate_total(items):
+<<<<<<< HEAD
+    # Current branch version
+    total = sum(item.price * 1.2 for item in items)  # With 20% tax
+=======
+    # Incoming branch version
+    total = sum(item.price * 1.15 for item in items)  # With 15% tax
+>>>>>>> feature/update-tax-calculation
+    return total
+```
+
+The markers mean:
+
+- `<<<<<<< HEAD`: Start of your current branch's version
+- `=======`: Divider between the two versions
+- `>>>>>>> branch-name`: End of the incoming branch's version
+
+
+
+
+
+
+
+
+
+## Resolving Conflicts
+
+When you encounter a merge conflict, follow these steps to resolve it:
+
+### Step 1: Identify the Conflicts
+
+After attempting a merge, Git will tell you which files have conflicts:
+
+```bash
+$ git merge feature/update-tax-calculation
+Auto-merging calculator.py
+CONFLICT (content): Merge conflict in calculator.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+You can see all conflicted files with:
+
+```bash
+$ git status
+```
+
+Files with conflicts will be listed under "Unmerged paths."
+
+### Step 2: Open and Edit the Conflicted Files
+
+Open each conflicted file in your editor. You'll see the conflict markers as shown earlier. Your job is to:
+
+1. **Decide which version to keep** (yours, theirs, or a combination)
+2. **Remove the conflict markers** (`<<<<<<<`, `=======`, `>>>>>>>`)
+3. **Keep only the final code you want**
+
+**Option A: Keep your version**
+```python
+def calculate_total(items):
+    total = sum(item.price * 1.2 for item in items)  # With 20% tax
+    return total
+```
+
+**Option B: Keep their version**
+```python
+def calculate_total(items):
+    total = sum(item.price * 1.15 for item in items)  # With 15% tax
+    return total
+```
+
+**Option C: Combine both (if it makes sense)**
+```python
+def calculate_total(items, tax_rate=0.15):
+    total = sum(item.price * (1 + tax_rate) for item in items)
+    return total
+```
+
+### Step 3: Mark as Resolved
+
+After editing the file and removing all conflict markers, stage it:
+
+```bash
+$ git add calculator.py
+```
+
+This tells Git that you've resolved the conflict in that file.
+
+### Step 4: Complete the Merge
+
+Once all conflicts are resolved and staged, complete the merge with:
+
+```bash
+$ git commit
+```
+
+Git will open your editor with a pre-filled commit message. You can modify it to explain how you resolved the conflicts, then save and close.
+
+### Best Practices for Conflict Resolution
+
+* **Test your code** after resolving conflicts to ensure it works correctly
+* **Communicate with your team** if you're unsure which version to keep
+* **Review the full context** by looking at both branches, not just the conflicted lines
+* **Use `git diff`** to see what changed in each branch before making decisions
+* **Don't rush** — conflicts often reveal important differences in approach
+
+### Aborting a Merge
+
+If you want to cancel the merge and start over:
+
+```bash
+$ git merge --abort
+```
+
+This returns your repository to the state before you attempted the merge.
+
+---
+
+This section provides practical, step-by-step guidance while maintaining the instructional tone of your existing content. Would you like me to adjust anything or add more detail to any particular step?
+
+
+
+
+
+
+
+
+
+
+### 3.2 Exercise 2: Creating and Resolving Conflicts (15 minutes)
+
+Let's intentionally create a conflict to practice resolving it.
+
+#### Part A: Creating a Conflict
+
+**Setup**: Work with a partner, or simulate two developers by using two different branches yourself.
+
+**Person A (or Branch 1)**:
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/update-multiply-docstring
+
+# Edit calc_lib.py - update the multiply function's docstring
+```
+
+Change the `multiply` function docstring to:
+
+```python
+def multiply(a, b):
+    """
+    Multiply two numbers together.
+    
+    Args:
+        a (float): First multiplicand
+        b (float): Second multiplicand
+    
+    Returns:
+        float: The product of a and b
+    """
+    return a * b
+```
+
+```bash
+git add calc_lib.py
+git commit -m "Improve multiply function documentation"
+git push origin feature/update-multiply-docstring
+```
+
+Create a Pull Request and **merge it**.
+
+**Person B (or Branch 2)**:
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/enhance-multiply-docstring
+
+# Edit calc_lib.py - update the same multiply function's docstring differently
+```
+
+Change the `multiply` function docstring to:
+
+```python
+def multiply(a, b):
+    """
+    Calculate the product of two numbers.
+    
+    Parameters:
+        a (float): The first number
+        b (float): The second number
+    
+    Returns:
+        float: a multiplied by b
+    
+    Example:
+        >>> multiply(4, 5)
+        20
+    """
+    return a * b
+```
+
+```bash
+git add calc_lib.py
+git commit -m "Add example to multiply function documentation"
+git push origin feature/enhance-multiply-docstring
+```
+
+Create a Pull Request. GitHub will indicate there's a conflict!
+
+#### Part B: Resolving the Conflict
+
+When GitHub shows a conflict, you have two options:
+
+1. **Resolve on GitHub** (web interface): Good for simple conflicts
+2. **Resolve locally** (command line): Better for complex conflicts
+
+**Let's resolve it locally**:
+
+```bash
+# Make sure you're on your feature branch
+git checkout feature/enhance-multiply-docstring
+
+# Pull the latest main which now contains the merged changes
+git pull origin main
+```
+
+Git will report a conflict:
+
+```
+Auto-merging calc_lib.py
+CONFLICT (content): Merge conflict in calc_lib.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**Step 1**: Check which files have conflicts
+
+```bash
+git status
+```
+
+You'll see:
+
+```
+Unmerged paths:
+  both modified:   calc_lib.py
+```
+
+**Step 2**: Open the conflicting file
+
+Open `calc_lib.py` in your editor. You'll see:
+
+```python
+def multiply(a, b):
+<<<<<<< HEAD
+    """
+    Calculate the product of two numbers.
+    
+    Parameters:
+        a (float): The first number
+        b (float): The second number
+    
+    Returns:
+        float: a multiplied by b
+    
+    Example:
+        >>> multiply(4, 5)
+        20
+    """
+=======
+    """
+    Multiply two numbers together.
+    
+    Args:
+        a (float): First multiplicand
+        b (float): Second multiplicand
+    
+    Returns:
+        float: The product of a and b
+    """
+>>>>>>> main
+    return a * b
+```
+
+**Step 3**: Decide what to keep
+
+You have three options:
+1. Keep your version (HEAD)
+2. Keep their version (main)
+3. **Combine both** (usually best!)
+
+Let's combine the best of both:
+
+```python
+def multiply(a, b):
+    """
+    Multiply two numbers together.
+    
+    Args:
+        a (float): First multiplicand
+        b (float): Second multiplicand
+    
+    Returns:
+        float: The product of a and b
+    
+    Example:
+        >>> multiply(4, 5)
+        20
+    """
+    return a * b
+```
+
+**Remove all conflict markers** (`<<<<<<<`, `=======`, `>>>>>>>`).
+
+**Step 4**: Mark the conflict as resolved
+
+```bash
+git add calc_lib.py
+```
+
+**Step 5**: Complete the merge
+
+```bash
+git commit -m "Merge main and resolve docstring conflict
+
+Combined both documentation improvements:
+- Kept clear docstring from main
+- Added example from feature branch"
+```
+
+**Step 6**: Push the resolved changes
+
+```bash
+git push origin feature/enhance-multiply-docstring
+```
+
+Your Pull Request now shows no conflicts and can be merged!
+
+### 3.3 Strategies to Minimise Conflicts (5 minutes)
+
+While conflicts are normal, you can reduce their frequency:
+
+#### 1. Communicate with Your Team
+
+- Discuss who's working on what
+- Avoid multiple people editing the same files simultaneously
+- Use project management tools to track work
+
+#### 2. Keep Pull Requests Small
+
+- Smaller changes = fewer conflicts
+- Merge frequently rather than letting branches grow stale
+
+#### 3. Pull from Main Regularly
+
+```bash
+# While on your feature branch
+git pull origin main
+```
+
+This keeps your branch up to date and surfaces conflicts early when they're easier to resolve.
+
+#### 4. Structure Code to Reduce Overlap
+
+- Modular code with clear boundaries
+- Each function/class in its own file when reasonable
+- Avoid giant files that everyone needs to edit
+
+#### 5. Use Feature Flags
+
+For long-running features, merge incomplete work behind a feature flag:
+
+```python
+ENABLE_NEW_FEATURE = False
+
+if ENABLE_NEW_FEATURE:
+    # New code path
+else:
+    # Existing code path
+```
+
+This allows you to merge regularly without activating incomplete features.

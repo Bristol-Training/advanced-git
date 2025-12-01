@@ -1,0 +1,136 @@
+---
+title: Pull Requests & Review
+---
+
+## Writing Effective Pull Requests
+
+A Pull Request (PR) is more than just code — it's communication with your team. A good PR makes reviewing easier and faster.
+
+Follow these tips to write effective pull requests:
+
+**1. Clear, Descriptive Title**
+
+❌ Bad: "Updates"  
+❌ Bad: "Fix bug"  
+✅ Good: "Add power function for exponent calculations"  
+✅ Good: "Fix division by zero error in calculator"
+
+**2. Comprehensive Description**
+
+Use a template:
+
+```markdown
+## Purpose
+Brief explanation of why this change is needed.
+
+## Changes
+- Bullet list of what was changed
+- Include files modified and what was done
+
+## Testing
+How you verified the changes work correctly.
+
+## Screenshots (if applicable)
+Visual changes should include before/after images.
+
+## Related Issues
+Closes #123
+Relates to #456
+```
+
+**3. Small, Focused Changes**
+
+- One feature or fix per Pull Request
+- Aim for under 400 lines of changes
+- If it's getting large, consider breaking it into multiple PRs
+
+
+**4. Self-Review First**
+
+Before requesting review:
+
+- Review your own code on GitHub
+- Check for debugging code or comments to remove
+- Verify tests pass
+- Ensure code follows project style guidelines
+
+::: {.callout-tip icon=false}
+### A Good Pull Request
+
+#### Title
+Add modulo operation to calculator library
+
+#### Purpose
+Users need to calculate remainders in division operations. This adds modulo functionality to support use cases like determining odd/even numbers or circular buffer indexing.
+
+#### Changes
+- Added `modulo(a, b)` function to `calc_lib.py`
+- Added unit tests in `test_calc.py`
+- Updated `README.md` with usage examples
+- Updated `calc_demo.py` to demonstrate modulo operation
+ 
+#### Testing
+- All existing tests pass
+- New tests cover positive numbers, negative numbers, and zero divisor
+- Manually verified examples in README
+ 
+#### Notes
+Raises `ValueError` when divisor is zero, consistent with existing `divide()` function behaviour.
+:::
+
+
+## Code Review Best Practices
+
+Code review is a skill that requires practice. Good reviews improve code quality while maintaining team morale.
+
+### For Reviewers: How to Review Constructively
+
+**1. Be Kind and Respectful**  
+Frame feedback constructively:
+
+❌ "This code is terrible"  
+✅ "This could be more efficient using a list comprehension"
+
+**2. Distinguish Between Issues and Suggestions**  
+Clarify what's required vs optional:
+
+- **Must fix**: "This will cause a bug with negative input"
+- **Should consider**: "Consider extracting this into a separate function"
+- **Nice to have**: "Descriptive variable names improve readability"
+
+**3. Provide Specific, Actionable Feedback**  
+❌ Vague: "This function needs work"  
+✅ Specific: "Add a check for None values at line 42."
+
+**4. Praise Good Work**  
+Acknowledge positives:
+
+- "Nice solution to this edge case!"
+- "Great test coverage!"
+
+**5. Review the Right Things**  
+Focus on:
+
+- **Correctness**: Does it work?
+- **Design**: Is it maintainable?
+- **Tests**: Are they adequate?
+- **Documentation**: Are changes documented?
+
+Avoid:
+
+- Personal style preferences (use automated formatters instead)
+- Trivial spacing issues (use linters instead)
+
+### For Authors: Receiving Feedback Gracefully
+
+**1. Don't Take It Personally**  
+Reviews critique code, not you.
+
+**2. Ask Questions**  
+If unclear: "Could you clarify 'more robust error handling'?"
+
+**3. Discuss, Don't Argue**  
+Explain your reasoning respectfully if you disagree.
+
+**4. Thank Reviewers**  
+"Thanks for catching that!" acknowledges their effort.
