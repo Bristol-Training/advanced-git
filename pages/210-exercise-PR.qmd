@@ -83,7 +83,7 @@ print(f"Variance (with NAs): {variance(test_data_with_na)}")
 **Step 4**: Test your changes
 
 ```bash
-python stats_demo.py
+python stats_demo.py data/temp1995.csv
 ```
 
 **Step 5**: Commit and push
@@ -148,7 +148,7 @@ print(f"Standard deviation: {std_dev(data)}")
 **Step 4**: Test your function
 
 ```bash
-python stats_demo.py
+python stats_demo.py data/temp1995.csv
 ```
 
 You should see the standard deviation calculated for the temperature data.
