@@ -225,13 +225,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#step-0-fork-and-clone-the-repository-url" id="toc-step-0-fork-and-clone-the-repository-url" class="nav-link active" data-scroll-target="#step-0-fork-and-clone-the-repository-url">Step 0: Fork and clone the repository URL</a></li>
-  <li><a href="#step-1-pull-latest-from-main-branch" id="toc-step-1-pull-latest-from-main-branch" class="nav-link" data-scroll-target="#step-1-pull-latest-from-main-branch">Step 1: Pull Latest from Main Branch</a></li>
-  <li><a href="#step-2-create-a-feature-branch" id="toc-step-2-create-a-feature-branch" class="nav-link" data-scroll-target="#step-2-create-a-feature-branch">Step 2: Create a Feature Branch</a></li>
-  <li><a href="#step-3-make-commits-on-your-branch" id="toc-step-3-make-commits-on-your-branch" class="nav-link" data-scroll-target="#step-3-make-commits-on-your-branch">Step 3: Make Commits on Your Branch</a></li>
-  <li><a href="#step-4-push-branch-and-open-pull-request" id="toc-step-4-push-branch-and-open-pull-request" class="nav-link" data-scroll-target="#step-4-push-branch-and-open-pull-request">Step 4: Push Branch and Open Pull Request</a></li>
-  <li><a href="#step-5-discuss-and-review-code" id="toc-step-5-discuss-and-review-code" class="nav-link" data-scroll-target="#step-5-discuss-and-review-code">Step 5: Discuss and Review Code</a></li>
-  <li><a href="#step-6-merge-to-main-and-delete-branch" id="toc-step-6-merge-to-main-and-delete-branch" class="nav-link" data-scroll-target="#step-6-merge-to-main-and-delete-branch">Step 6: Merge to Main and Delete Branch</a></li>
+  <li><a href="#step-1-fork-a-repository" id="toc-step-1-fork-a-repository" class="nav-link active" data-scroll-target="#step-1-fork-a-repository">Step 1: Fork a repository</a></li>
+  <li><a href="#step-1-clone-the-repository-url" id="toc-step-1-clone-the-repository-url" class="nav-link" data-scroll-target="#step-1-clone-the-repository-url">Step 1: Clone the repository URL</a></li>
+  <li><a href="#step-2-pull-latest-from-main-branch" id="toc-step-2-pull-latest-from-main-branch" class="nav-link" data-scroll-target="#step-2-pull-latest-from-main-branch">Step 2: Pull Latest from Main Branch</a></li>
+  <li><a href="#step-3-create-a-feature-branch" id="toc-step-3-create-a-feature-branch" class="nav-link" data-scroll-target="#step-3-create-a-feature-branch">Step 3: Create a Feature Branch</a></li>
+  <li><a href="#step-4-make-commits-on-your-branch" id="toc-step-4-make-commits-on-your-branch" class="nav-link" data-scroll-target="#step-4-make-commits-on-your-branch">Step 4: Make Commits on Your Branch</a></li>
+  <li><a href="#step-5-push-branch-and-open-pull-request" id="toc-step-5-push-branch-and-open-pull-request" class="nav-link" data-scroll-target="#step-5-push-branch-and-open-pull-request">Step 5: Push Branch and Open Pull Request</a></li>
+  <li><a href="#step-6-discuss-and-review-code" id="toc-step-6-discuss-and-review-code" class="nav-link" data-scroll-target="#step-6-discuss-and-review-code">Step 6: Discuss and Review Code</a></li>
+  <li><a href="#step-7-merge-to-main-and-delete-branch" id="toc-step-7-merge-to-main-and-delete-branch" class="nav-link" data-scroll-target="#step-7-merge-to-main-and-delete-branch">Step 7: Merge to Main and Delete Branch</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/uob-training/advanced-git/edit/main/pages/100-gh-flow.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/uob-training/advanced-git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -264,12 +265,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-The Six Key Steps
+The Seven Key Steps
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol start="0" type="1">
-<li><strong>Fork and clone the repository URL</strong>: Fork the repository on GitHub and clone your fork locally so you can start working on changes</li>
+<li><strong>Fork and clone the repository URL</strong>: Fork the repository on GitHub</li>
+<li><strong>Clone the repository URL</strong>: Clone your fork locally so you can start working on changes</li>
 <li><strong>Pull latest from main branch</strong>: Always start with the most recent code</li>
 <li><strong>Create a feature branch</strong>: Make a new branch for your work</li>
 <li><strong>Make commits on your branch</strong>: Save your changes regularly</li>
@@ -279,34 +281,39 @@ The Six Key Steps
 </ol>
 </div>
 </div>
-<section id="step-0-fork-and-clone-the-repository-url" class="level3">
-<h3 class="anchored" data-anchor-id="step-0-fork-and-clone-the-repository-url">Step 0: Fork and clone the repository URL</h3>
-<p>Navigate to the repository on GitHub and click “Fork” to create your own copy. On your forked repository page in GitHub, click the green “Code” button and copy the HTTPS URL (it should look like <code>https://github.com/YOUR-USERNAME/demo-calc-lib.git</code>).</p>
+<section id="step-1-fork-a-repository" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-fork-a-repository">Step 1: Fork a repository</h3>
+<p>If you want to contribute to a repository where you haven’t been added as a collaborator you need to <strong>fork</strong> it.</p>
+<p>Navigate to the repository on GitHub, e.g.&nbsp;<a href="https://github.com/Bristol-Training/demo-calc-lib" class="uri">https://github.com/Bristol-Training/demo-calc-lib</a>.</p>
+<p>Click “Fork” in the top-right corner This creates a copy under your GitHub account (https://github.com/YOUR-USERNAME/demo-calc-lib)</p>
+</section>
+<section id="step-1-clone-the-repository-url" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-clone-the-repository-url">Step 1: Clone the repository URL</h3>
+<p>On your repository page in GitHub, click the green “Code” button and copy the HTTPS URL (it should look like <code>https://github.com/YOUR-USERNAME/demo-calc-lib.git</code>).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/YOUR-USERNAME/demo-calc-lib.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> demo-calc-lib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="step-1-pull-latest-from-main-branch" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-pull-latest-from-main-branch">Step 1: Pull Latest from Main Branch</h3>
-<p>Before starting new work, ensure you have the latest version of the main branch:</p>
+<section id="step-2-pull-latest-from-main-branch" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-pull-latest-from-main-branch">Step 2: Pull Latest from Main Branch</h3>
+<p>Before starting new work, ensure you have the latest version of the main branch. This ensures you’re building on the most recent stable version, reducing the chance of conflicts later.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This ensures you’re building on the most recent stable version, reducing the chance of conflicts later.</p>
 </section>
-<section id="step-2-create-a-feature-branch" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-create-a-feature-branch">Step 2: Create a Feature Branch</h3>
+<section id="step-3-create-a-feature-branch" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-create-a-feature-branch">Step 3: Create a Feature Branch</h3>
 <p>Create a new branch for your feature or fix:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/add-user-authentication</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/add-power-function</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Branch naming conventions</strong> help teams stay organised:</p>
 <ul>
-<li><code>feature/</code> — for new features (e.g., <code>feature/add-login-page</code>)</li>
+<li><code>feature/</code> — for new features (e.g., <code>feature/add-power-function</code>)</li>
 <li><code>fix/</code> or <code>bugfix/</code> — for bug fixes (e.g., <code>fix/correct-calculation-error</code>)</li>
 <li><code>docs/</code> — for documentation updates (e.g., <code>docs/update-readme</code>)</li>
 <li><code>refactor/</code> — for code improvements (e.g., <code>refactor/simplify-database-queries</code>)</li>
 </ul>
 <p>Use descriptive names that explain what the branch does. Avoid vague names like <code>my-branch</code> or <code>updates</code>.</p>
 </section>
-<section id="step-3-make-commits-on-your-branch" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-make-commits-on-your-branch">Step 3: Make Commits on Your Branch</h3>
+<section id="step-4-make-commits-on-your-branch" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-make-commits-on-your-branch">Step 4: Make Commits on Your Branch</h3>
 <p>Work on your changes and commit regularly:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make changes to files</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
@@ -323,10 +330,10 @@ The Six Key Steps
 <li>Explain <em>what</em> and <em>why</em>, not <em>how</em></li>
 </ul>
 </section>
-<section id="step-4-push-branch-and-open-pull-request" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-push-branch-and-open-pull-request">Step 4: Push Branch and Open Pull Request</h3>
+<section id="step-5-push-branch-and-open-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-push-branch-and-open-pull-request">Step 5: Push Branch and Open Pull Request</h3>
 <p>Push your branch to GitHub:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin feature/add-user-authentication</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin feature/add-power-function</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then, on GitHub:</p>
 <ol type="1">
 <li>Navigate to your repository</li>
@@ -336,8 +343,8 @@ The Six Key Steps
 <li>Click “Create pull request”</li>
 </ol>
 </section>
-<section id="step-5-discuss-and-review-code" class="level3">
-<h3 class="anchored" data-anchor-id="step-5-discuss-and-review-code">Step 5: Discuss and Review Code</h3>
+<section id="step-6-discuss-and-review-code" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-discuss-and-review-code">Step 6: Discuss and Review Code</h3>
 <p>This is where collaboration happens:</p>
 <ul>
 <li><strong>Reviewers</strong> examine the code, suggest improvements, and ask questions</li>
@@ -349,11 +356,11 @@ The Six Key Steps
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the requested changes</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Address review comments: improve error handling"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin feature/add-user-authentication</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin feature/add-power-function</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The Pull Request automatically updates with your new commits.</p>
 </section>
-<section id="step-6-merge-to-main-and-delete-branch" class="level3">
-<h3 class="anchored" data-anchor-id="step-6-merge-to-main-and-delete-branch">Step 6: Merge to Main and Delete Branch</h3>
+<section id="step-7-merge-to-main-and-delete-branch" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-merge-to-main-and-delete-branch">Step 7: Merge to Main and Delete Branch</h3>
 <p>Once approved, merge the Pull Request via GitHub’s interface:</p>
 <ol type="1">
 <li>Click “Merge pull request”</li>
@@ -363,7 +370,7 @@ The Six Key Steps
 <p>Then, locally:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/add-user-authentication</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/add-power-function</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
